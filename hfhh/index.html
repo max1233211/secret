@@ -83,10 +83,10 @@
   <div id="message"></div>
 
   <script>
-    const text = "АНЯ ТЕБЕ КОХАЮ❤️";
+    const text = "Я ТЕБЕ ЛЮБЛЮ❤️";
     const message = document.getElementById("message");
 
-    // Розбиваємо текст на окремі span-літери
+
     function initMessage() {
       message.innerHTML = "";
       for (const char of text) {
@@ -98,41 +98,34 @@
     }
 
     function showMessage() {
-      // Якщо вже показано, нічого не робимо
+
       if (message.dataset.animated) return;
       message.dataset.animated = true;
 
-      // Показуємо основне повідомлення — воно вже на екрані
-      // Додаємо анімацію "розмноження" букв
       const letters = [...message.querySelectorAll(".letter")];
 
       letters.forEach((letter, i) => {
-        // Створюємо копії букв, що розлітаються
+
         for (let j = 0; j < 5; j++) {
           const clone = letter.cloneNode(true);
           clone.classList.add("flying-letter");
 
-          // Отримаємо позицію букви відносно вікна
           const rect = letter.getBoundingClientRect();
 
-          // Встановлюємо початкові координати clone в тому ж місці
           clone.style.left = rect.left + "px";
           clone.style.top = rect.top + "px";
 
-          // Випадкові значення переміщення
-          const tx = (Math.random() - 0.5) * 500 + "px"; // по горизонталі
-          const ty = (Math.random() - 0.5) * 300 + "px"; // по вертикалі
+          const tx = (Math.random() - 0.5) * 500 + "px";
+          const ty = (Math.random() - 0.5) * 300 + "px";
 
           clone.style.setProperty("--tx", tx);
           clone.style.setProperty("--ty", ty);
 
-          // Затримка анімації для ефекту хвилі
           clone.style.animation = `flyAway 2s ease-out forwards`;
           clone.style.animationDelay = `${(i * 0.1 + j * 0.05)}s`;
 
           document.body.appendChild(clone);
 
-          // Видаляємо clone після анімації, щоб не засмічувати DOM
           clone.addEventListener("animationend", () => {
             clone.remove();
           });
